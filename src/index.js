@@ -7,7 +7,7 @@ class Square extends React.Component
   render()
   {
     return(
-    <button className="square" onClick={this.props.onClick}>
+    <button className="circle" onClick={this.props.onClick}>
     {this.props.value}
     </button>
     );
@@ -19,19 +19,19 @@ class Square extends React.Component
     let count=0;
     for(let i=0;i<squares.length;i++)
     {
-      if(squares[i]=='X')
+      if(squares[i]=='O')
       {
         count++;
         if(i-1>=0)
         {
-          if(squares[i-1]=='X')
+          if(squares[i-1]=='O')
           {
           return true;
           }
         }
         if(i+1<46)
         {
-          if(squares[i+1]=='X')
+          if(squares[i+1]=='O')
           {
           return true;
           }
@@ -39,19 +39,23 @@ class Square extends React.Component
         }
         if(i-7>=0)
         {
-          if(squares[i-7]=='X')
+          if(squares[i-7]=='O')
           {
           return true;
           }
         }
         if(i+7<46)
         {
-          if(squares[i+7]=='X')
+          if(squares[i+7]=='O')
           {
           return true;
           }
         }
       }
+    }
+    if(count==1)
+    {
+      return -1;
     }
     return count;
   }
@@ -60,7 +64,7 @@ class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          squares: Array(47).fill('X'),
+          squares: Array(47).fill('O'),
           xIsNext:true,
           track:-1
         };
@@ -90,15 +94,12 @@ class Board extends React.Component {
         {
         this.state.squares[(this.state.track+i)/2]=null;
         this.state.squares[this.state.track]=null;
-        this.state.squares[i]='X';
+        this.state.squares[i]='O';
         }
       }
       
       handleClick(i) {
         const squares = this.state.squares;
-        // if (calculateWinner(squares) || squares[i]) {
-        //     return;
-        //   }
         if(this.state.xIsNext==false)
         {
           if(this.state.squares[i]==null && (this.state.track!=i))
@@ -136,11 +137,23 @@ class Board extends React.Component {
     if(winner!=true)
     {
       stat='GameOver'
+      if(winner==-1)
+      {
+        return(
+          <div>
+          <div className="status">{"You Won!!!"}</div>
+          </div>
+          );
+
+      }
+      else{
       return(
       <div>
-      <div className="status">{status +" "+stat+" "+"Marble left on boards "+winner}</div>
+      <div className="status">{status +" "+stat}</div>
+      <div className="status">{"Marble left on boards: "+winner}</div>
       </div>
       );
+    }
     }
     
     if (!winner) {
