@@ -28,7 +28,7 @@ ol, ul {
 
 }
 
-.square {
+.player {
   background: #fff;
   border: 2px solid #999;
   float: left;
@@ -44,7 +44,7 @@ ol, ul {
 }
 
 .circle {
-  background: url(https://d13yacurqjgara.cloudfront.net/users/212457/screenshots/2212523/yo.jpg) #000;
+  background: url(https://d13yacurqjgara.cloudfront.net/users/212457/screenshots/2212523/yo.jpg);
   float: left;
   font-size: 30px;
   font-weight: bold;

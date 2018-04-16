@@ -1,16 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import './marble.png'
+import logo from './marble.png';
+import line from './line.png';
 
 class Square extends React.Component
 {
   render()
   {
+    if(this.props.value=='O')
+    {
+      return(
+        
+      <button className="circle" onClick={this.props.onClick}>
+      <img src={logo} width="30" height="30" />
+      </button>
+      );
+    }
+    else
+    {
     return(
     <button className="circle" onClick={this.props.onClick}>
-    {this.props.value}
     </button>
     );
+  }
   }
 }
 
@@ -212,22 +226,35 @@ class Board extends React.Component {
           {this.renderSquare(45)}
           {this.renderSquare(46)}
         </div>
-      </div>
+        </div>
+      
     );
   }
   }
 }
 
+
 class Game extends React.Component {
   render() {
     return (
       <div className="game">
+      <div>
         <div className="game-board">
           <Board />
         </div>
         <div className="game-info">
-          <div>{/* status */}</div>
-          <ol>{/* TODO */}</ol>
+        </div>
+          <div>
+          <div><img src={line} width="1000" height="50" /></div>
+          <div>{"About Game"}</div>
+          <div>
+            <ol>"Brainvita, also called Peg Solitaire, is a single person board game. It involves moving marbles from one position to another position on the board according to rules. The objective is to have as few marbles as possible at the end of the game."</ol>
+          </div>
+          <div>Rules</div>
+          <div><ol>The board consists of holes(positions) which can hold marbles. All positions, except one, have marbles placed in them at the start of the game. A valid move for a marble is moving it from its position to an empty position(which is two positions away, horizontally or vertically) by jumping over a non-empty position. The marble in the 'jumped' position is removed from the board. The game ends when there is no valid move possible.
+                  The objective is to move marbles such that at the end of the game, there are as few marbles as possible. A single marble is a perfect result.
+                  Play Brainvita online, now!</ol></div>
+          </div>
         </div>
       </div>
     );
